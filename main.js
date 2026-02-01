@@ -5,11 +5,6 @@ const crud = require("./crud.js");
 yargs.command({
   command: "add random",
   describe: "writing a new random joke",
-  builder: {
-    name: { describe: "name" },
-    age: { describe: "age" },
-    joke: { describe: "joke" },
-  },
   handler: () => {
     crud.addJoke();
   },
@@ -30,16 +25,9 @@ yargs.command({
 // List all jokes
 yargs.command({
   command: "list",
-  describe: "list all jokes",
+  describe: "listing all jokes",
   handler: () => {
-    try {
-      let jokeList = crud.readJokes();
-      jokeList.forEach((element) => {
-        console.log(element.joke);
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    crud.listJokes();
   },
 });
 
@@ -55,4 +43,11 @@ yargs.command({
   },
 });
 
+yargs.command({
+  command: "read random",
+  describe: "read a random joke (picked by random index)",
+  handler: () => {
+    crud.readRandom();
+  }
+})
 yargs.parse();
